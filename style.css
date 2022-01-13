@@ -7,9 +7,15 @@
 body {
     display: flex;
     flex-direction: column;
+    align-items: center;
+}
+.container {
+    height: 100vh;
+    width: 100%;
 }
 header {
-    text-align: center;
+    display: flex;
+    justify-content: center;
     padding: 50px;
 }
 nav {
@@ -19,7 +25,7 @@ nav {
     align-items: center;
     gap: 10px;
 }
-nav button {
+nav button,#addBookButton {
     height: 50px;
     width: 100px;
     font-weight: bold;
@@ -27,7 +33,8 @@ nav button {
 footer {
     text-align: center;
     position: absolute;
-    width: 100%;
+    left: 0;
+    right: 0;
     bottom: 0;
     padding: 20px;
 }
@@ -61,15 +68,14 @@ footer {
     font-size: 1.5vh;
     padding-top: 40px;
     text-align: center;
+    background: white;
 }
 .removeBookButton {
     position: absolute;
     bottom: 0;
     width: 100%;
     height: 30px;
-    border-radius: 0;
-    border: 1px solid black;
-    border-top: 2px solid black;
+    border: 0;
 }
 .isReadStatus {
     position: absolute;
@@ -80,15 +86,52 @@ footer {
     width: 100%;
     height: 30px;
     border: 1px solid black;
+    border-left: 0;
+    border-right: 0;
     margin-top: 5px;
     padding: 20px;
 }
 .addBookMenu {
+    display: none;
     flex-direction: column;
     align-items: center;
-    display: none;
-    padding-bottom: 30px;
+    position: fixed;
+    padding: 30px;
+    z-index: 1;
+    border: 1px solid black;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    background: white;
+}
+.addBookMenu .closeBookMenu {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 30px;
+    width: 30px;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    border: 0;
+    animation-name: animatedown;
+    animation-duration: 0.4s;
 }
 .addBookMenuBtn {
     margin-bottom: 30px;
+}
+
+@-webkit-keyframes animatetop {
+    from {opacity: 0} 
+    to {opacity: 1}
+}
+@keyframes animatetop {
+    from {opacity: 0}
+    to {opacity: 1}
+}
+.errorMsg {
+    height: 20px;
+    padding-top: 15px;
+    color: red;
+    font-weight: bold;
+    display: none;
 }

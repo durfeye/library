@@ -11,20 +11,25 @@
 </head>
 
 <body>
-    <header>
-        <div class="logo">
-            <h1>The Library</h1>
-        </div>
-    </header>
-    <nav>
-        <div class="addBook">
+    <container class="container">
+        <header class="header">
+            <div class="logo">
+                <h1>The Library</h1>
+            </div>
+        </header>
+        <nav class="nav">
             <button class="addBookMenuBtn">Add book</button>
-        </div>
-        <section class="addBookMenu">
+        </nav>
+        <section class="bookShelf"></section>
+        <footer class="footer">
+            by Durfy
+        </footer>
+    </container>
+    <section class="addBookMenu">
         <div class="bookInfo">
-            <label>Book's name <input id="booksName" type="text"></label>
-            <label>Book's author <input id="booksAuthor" type="text"></label>
-            <label>Book's pages <input id="booksPages" type="number"></label>
+            <label>Book's name <input id="booksName" type="text" required></label>
+            <label>Book's author <input id="booksAuthor" type="text" required></label>
+            <label>Book's pages <input id="booksPages" type="number" required></label>
             <label>Is book read?
                 <select id="isBookRead">
                     <option value="yes">Yes</option>
@@ -32,19 +37,10 @@
                 </select>
             </label>
         </div>
-        <div class="menuOptions">
-            <button id="addBookButton">Accept</button>
-        </div>
-        
+        <button id="addBookButton">Accept</button>
+        <button class="closeBookMenu">X</button>
+        <span class="errorMsg">All fields are required!</span>
     </section>
-    </nav>
-    <section class="bookShelf">
-
-    </section>
-    <footer>
-        by Durfy
-    </footer>
-
 </body>
 
 </html>

@@ -6,6 +6,12 @@ const addBookButton = document.querySelector('#addBookButton');
 const bookShelf = document.querySelector('.bookShelf');
 let addBookMenu = document.querySelector('.addBookMenu');
 let addBookMenuBtn = document.querySelector('.addBookMenuBtn');
+let closeBookMenuBtn = document.querySelector('.closeBookMenu');
+let container = document.querySelector('.container');
+const header = document.querySelector('.header');
+const footer = document.querySelector('.footer');
+let nav = document.querySelector('.nav');
+let errorMsg = document.querySelector('.errorMsg');
 // let removeBookButton = document.createElement('button');
 // let isReadStatusButton;
 
@@ -23,11 +29,21 @@ Book.prototype.addBookToLibrary = function (addNewBook) {
     author = booksAuthor.value
     pages = booksPages.value
     isRead = isBookRead.value
-    addNewBook = new Book(title, author, pages, isRead);
-    Library.push(addNewBook);
-    let newBook = document.createElement('div');
-    newBook.classList.add('singleBook');
-    showBooks(newBook);
+    if (booksName.value === '' || booksAuthor.value === '' || booksPages.value === '') {
+        errorMsg.style.display = 'block';
+        return;
+    }
+    else {
+        errorMsg.style.display = 'none';
+        addNewBook = new Book(title, author, pages, isRead);
+        Library.push(addNewBook);
+        let newBook = document.createElement('div');
+        newBook.classList.add('singleBook');
+        booksName.value = '';
+        booksAuthor.value = '';
+        booksPages.value = '';
+        showBooks(newBook);
+    }
 }
 
 function showBooks(newBook) {
@@ -87,15 +103,23 @@ function isReadStatus(newBook, bookNode) {
 }
 
 function toggleBookMenu() {
-    if (addBookMenu.style.display === 'none' || addBookMenu.style.display === '' ) {
+    if (addBookMenu.style.display === 'none' || addBookMenu.style.display === '') {
         addBookMenu.style.display = 'flex';
-        addBookMenuBtn.textContent = 'Close';
+        container.style = 'background: rgba(0, 0, 0, 0.5); opacity: 0.15';
     }
-    else if (addBookMenu.style.display === 'flex'){
+    else if (addBookMenu.style.display === 'flex') {
         addBookMenu.style.display = 'none';
-        addBookMenuBtn.textContent = 'Add book';    
+        container.style = 'background: white; opacity: 1';
     }
 }
 
 addBookButton.addEventListener('click', Book.prototype.addBookToLibrary);
 addBookMenuBtn.addEventListener('click', toggleBookMenu);
+closeBookMenuBtn.addEventListener('click', toggleBookMenu);
+window.addEventListener('click', (e) => {
+    if (e.target === container || e.target === header || e.target === footer || e.target === bookShelf || e.target === nav) {
+        addBookMenu.style.display = 'none';
+        addBookMenuBtn.style.display = 'block';
+        container.style = 'background: white; opacity: 1';
+    }
+});
