@@ -4,7 +4,10 @@ let booksPages = document.querySelector('#booksPages');
 let isBookRead = document.querySelector('#isBookRead');
 const addBookButton = document.querySelector('#addBookButton');
 const bookShelf = document.querySelector('.bookShelf');
+let addBookMenu = document.querySelector('.addBookMenu');
+let addBookMenuBtn = document.querySelector('.addBookMenuBtn');
 // let removeBookButton = document.createElement('button');
+// let isReadStatusButton;
 
 let Library = [];
 
@@ -35,9 +38,9 @@ function showBooks(newBook) {
         // newBook.classList.add('singleBook');
         newBook.innerHTML =
             `
-        Title: ${title} </br>
-        Author: ${author} </br>
-        Pages: ${pages} </br>
+        <b>${title}</b></br>
+        ${author}</br>
+        ${pages} pages
         </div>
         `;
         let libraryIndex = Library.length - 1;
@@ -53,12 +56,11 @@ function showBooks(newBook) {
             bookShelf.removeChild(newBook);
             delete Library[bookNode];
         });
-        isReadStatus(newBook);
+        isReadStatus(newBook, bookNode);
     }
 }
-addBookButton.addEventListener('click', Book.prototype.addBookToLibrary);
 
-function isReadStatus(newBook) {
+function isReadStatus(newBook, bookNode) {
     let isReadStatusButton = document.createElement('button');
     isReadStatusButton.classList.add('isReadStatus');
     newBook.appendChild(isReadStatusButton);
@@ -70,14 +72,30 @@ function isReadStatus(newBook) {
         isReadStatusButton.style.background = 'red';
         isReadStatusButton.textContent = 'No read yet';
     }
-        // isReadStatusButton.addEventListener('click', () => {
-        //     if (isRead === 'yes') {
-        //         isRead = 'no';
-        //     }
-        //     else if (isRead === 'no') {
-        //         isRead = 'yes';
-        //     }
-        // });
+    isReadStatusButton.addEventListener('click', () => {
+        if (isReadStatusButton.style.background === 'red') {
+            isReadStatusButton.style.background = 'green';
+            isReadStatusButton.textContent = 'Already read';
+            Library[bookNode].isRead = 'yes';
+        }
+        else {
+            isReadStatusButton.style.background = 'red';
+            isReadStatusButton.textContent = 'No read yet';
+            Library[bookNode].isRead = 'no';
+        }
+    });
 }
 
+function toggleBookMenu() {
+    if (addBookMenu.style.display === 'none' || addBookMenu.style.display === '' ) {
+        addBookMenu.style.display = 'flex';
+        addBookMenuBtn.textContent = 'Close';
+    }
+    else if (addBookMenu.style.display === 'flex'){
+        addBookMenu.style.display = 'none';
+        addBookMenuBtn.textContent = 'Add book';    
+    }
+}
 
+addBookButton.addEventListener('click', Book.prototype.addBookToLibrary);
+addBookMenuBtn.addEventListener('click', toggleBookMenu);

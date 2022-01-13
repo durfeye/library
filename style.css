@@ -32,7 +32,10 @@ footer {
     padding: 20px;
 }
 .bookInfo {
-    padding: 20px;
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 .bookInfo #booksName,#booksAuthor {
     width: 150px;
@@ -49,13 +52,15 @@ footer {
 }
 .bookShelf .singleBook {
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
     min-height: 200px;
-    min-width: 100px;
+    width: 140px;
     border: 1px solid black;
     position: relative;
+    font-size: 1.5vh;
+    padding-top: 40px;
+    text-align: center;
 }
 .removeBookButton {
     position: absolute;
@@ -67,6 +72,8 @@ footer {
     border-top: 2px solid black;
 }
 .isReadStatus {
+    position: absolute;
+    bottom: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -75,4 +82,13 @@ footer {
     border: 1px solid black;
     margin-top: 5px;
     padding: 20px;
+}
+.addBookMenu {
+    flex-direction: column;
+    align-items: center;
+    display: none;
+    padding-bottom: 30px;
+}
+.addBookMenuBtn {
+    margin-bottom: 30px;
 }
